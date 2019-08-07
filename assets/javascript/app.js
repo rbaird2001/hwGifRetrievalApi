@@ -1,11 +1,9 @@
-var favs = ["Pizza", "Doughnuts", "Sushi", "Hamburgers", "Beer"];
 var qKey = "b1rMOopBhHEZCR3Thcpk9lhZzicm545Y";
-var qLimit = 5;
-
-//
-//&limit=
-
+var qLimit = 10;
+var favs = ["Pizza", "Doughnuts", "Sushi", "Hamburgers", "Beer"];
 loadFavs();
+newFavorite();  
+
 function loadFavs() {
     for (i = 0; i < favs.length; i++) {
         let divFav = $("#favorites");
@@ -20,12 +18,28 @@ function loadFavs() {
     }
 }
 
+function newFavorite() {
+    $("#addFav").click(function () {
+    let favName = $("#favName").val().trim();
+        if (!favName) {
+            alert("Specify your favorite first");
+            return false;
+        }
+        else {
+            favs.push(favName);
+            $("#favorites").empty();
+            loadFavs();
+        }
+    })
+}
+
 function searchGiphy(qTerm) {
     let queryUrl = "https://api.giphy.com/v1/gifs/search?q=";
     queryUrl += qTerm;
-    queryUrl += "&api_key="  + qKey;
+    queryUrl += "&api_key=" + qKey;
     queryUrl += "&limit=" + qLimit;
-    
+    queryUrl += "&rating=pg";
+
     $.ajax({
         url: queryUrl,
         method: "GET"
@@ -33,7 +47,7 @@ function searchGiphy(qTerm) {
         var resDet = response.data
         var divResponse = $("#results")
         divResponse.empty();
-        for (i = 0; i < resDet.length; i++) {           
+        for (i = 0; i < resDet.length; i++) {
             let gifImage = $("<img>")
             gifImage.attr({
                 "src": resDet[i].images.fixed_height_still.url,
