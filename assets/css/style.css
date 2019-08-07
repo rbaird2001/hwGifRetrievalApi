@@ -25,7 +25,7 @@ button{
 }
 
 .favButton{
-    margin-top: 3%
+    margin-top: 7px;
 }
 
 #mainContainer{
@@ -61,7 +61,7 @@ flex-wrap: wrap;
 #favorites{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     height: 12%;
     width: 95%;
