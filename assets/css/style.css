@@ -1,12 +1,13 @@
 button{
-    margin: 0 .5rem;
+    width: 99%;
     background-color: lavenderblush;
     border-color: blanchedalmond;
     border-style: outset;
     border-width: thin;
-    font-size: medium;
-    width: 8rem;
+    font-size: smaller;
 }
+
+
 
 .imgCont{
     position: relative;
@@ -19,21 +20,112 @@ button{
     position: absolute;
     top: 8px;
     left: 16px;
-    /* background-color: antiquewhite; */
     padding: 1px 1px;
     font-size: 1.33rem;
 }
 
+.favButton{
+    margin-top: 3%
+}
+
+#mainContainer{
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas:
+      "header header header"
+      "output favorites input"
+      "footer footer footer";
+    grid-template-columns: 6fr 2fr 2fr;
+    grid-template-rows: 30px 1fr 30px;
+}
+
+#contentContainer{
+    grid-area: output;
+}
+
+#results{
+display: flex;
+flex-wrap: wrap;   
+}
+
+
+#favoritesContainer{
+    grid-area: favorites;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-right: black solid thin;
+}
+
+#favorites{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 12%;
+    width: 95%;
+    /* margin-top: 25% */
+}
+
+#optionsContainer{
+    grid-area: input;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
 #newFav{
-    margin: 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border-bottom-color: black;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+}
+#selectOption{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    align-content: center;
+    /* margin-top: 25%; */
 }
 #favName{
     border-color: bisque;
-    width: 10rem;
+    width: 95%;
     height: 1.1rem;
-    margin-bottom: .2rem;
+    margin-bottom: 4%;
+    font-size: 1rem;
 }
 
 #addFav{
     margin-left: 0;
+}
+
+@media only screen and (max-width: 788px){
+    #mainContainer{
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-areas:
+          "input "
+          "favorites"
+          "output";
+        grid-template-columns: 1fr;
+        grid-template-rows: 80px 300px 1fr;
+    }
+    #favoritesContainer{
+        /* grid-area: favorites; */
+        border-style: none;
+        margin-bottom: 10%;
+    }
+
+    #optionsContainer{
+        /* grid-area: input; */
+        border-style: none;
+    }
+
+    #newFav{  
+        border-style: none;
+    }
 }
