@@ -44,16 +44,19 @@ function searchGiphy(qTerm) {
         url: queryUrl,
         method: "GET"
     }).then(function (response) {
-        var resDet = response.data
-        var divResponse = $("#results")
-        divResponse.empty();
-        for (i = 0; i < resDet.length; i++) {
+        var resDat = response.data
+        
+        var divResults = $("#results")
+        divResults.empty();
+        for (i = 0; i < resDat.length; i++) {
+            let divCont = $("<div>").addClass("container imgCont")
+            let divRating = $("<div>").addClass("imgCaption").text(resDat[i].rating)
             let gifImage = $("<img>")
             gifImage.attr({
-                "src": resDet[i].images.fixed_height_still.url,
+                "src": resDat[i].images.fixed_height_still.url,
                 "data-state": "still",
-                "data-still": resDet[i].images.fixed_height_still.url,
-                "data-move": resDet[i].images.fixed_height.url
+                "data-still": resDat[i].images.fixed_height_still.url,
+                "data-move": resDat[i].images.fixed_height.url
             }).click(function () {
                 clik = $(this)
                 if (clik.attr("data-state") === "still") {
@@ -65,9 +68,10 @@ function searchGiphy(qTerm) {
                     clik.attr("data-state", "still");
                 }
             });
-            let gifRating = $("<p>").html(resDet[i].rating);
-            divResponse.append(gifRating);
-            divResponse.append(gifImage);
+            //let gifRating = $("<span>").html(resDat[i].rating);
+            divCont.append(gifImage)
+            divCont.append(divRating);
+            divResults.append(divCont);
         }
 
     });
