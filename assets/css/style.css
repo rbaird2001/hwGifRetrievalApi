@@ -1,3 +1,13 @@
+button{
+    margin: 0 .5rem;
+    background-color: lavenderblush;
+    border-color: blanchedalmond;
+    border-style: outset;
+    border-width: thin;
+    font-size: medium;
+    width: 8rem;
+}
+
 .imgCont{
     position: relative;
     display: inline-block;
@@ -12,4 +22,18 @@
     /* background-color: antiquewhite; */
     padding: 1px 1px;
     font-size: 1.33rem;
+}
+
+#newFav{
+    margin: 2rem 2rem;
+}
+#favName{
+    border-color: bisque;
+    width: 10rem;
+    height: 1.1rem;
+    margin-bottom: .2rem;
+}
+
+#addFav{
+    margin-left: 0;
 }
