@@ -1,15 +1,18 @@
 var qKey = "b1rMOopBhHEZCR3Thcpk9lhZzicm545Y";
 var qLimit = 10;
+var lastWidth = $(window).width();
 var favs = ["Pizza", "Doughnuts", "Sushi", "Hamburgers", "Beer"];
 loadFavs();
-newFavorite();  
+newFavorite();
+$("#favToggle").click(collapseSize);
 
 
 function loadFavs() {
     setGridRowForSizeBrkPt();
     for (i = 0; i < favs.length; i++) {
         let divFav = $("#favorites");
-        let btnFav = $("<button class=favButton>");
+        let btnFav = $("<button>")
+        btnFav.addClass("favButton collapse");
         btnFav.attr("val", favs[i].toLowerCase());
         btnFav.html(favs[i]);
         btnFav.click(function () {
@@ -82,12 +85,29 @@ function searchGiphy(qTerm) {
 function setGridRowForSizeBrkPt(){
     let w = $(window).width();
     //console.log(w);
-        gridRowSize = (favs.length * 34);
-    if(w < 789 ){
-        $("#mainContainer").css("grid-template-rows","80px " + gridRowSize + "px 1fr");
+    if(w < 500){
+        if(w>lastWidth && !$("#favToggle").hasClass("collapsed")){
+            return;
+        }
+        $("#favToggle").addClass("collapsed").attr("aria-expanded",true);
+        $(".favButton").removeClass("show");
+        lastWidth = w;
+        collapseSize();
     }
         else {
-        $("#mainContainer").css("grid-template-rows","30px 1fr 30px");
+        $("#mainContainer").css("grid-template-rows","80px 110px");
+        $("#favToggle").removeClass("collapsed").attr("aria-expanded",true);
+        $(".favButton").addClass("show");
+    }
+}
+
+function collapseSize(){
+    if(!$("#favToggle").hasClass("collapsed")){
+        $("#mainContainer").css("grid-template-rows","80px 110px 40px 1fr");
+    }
+    else{
+        let gridRowSize = (favs.length * 34);
+        $("#mainContainer").css("grid-template-rows","80px 110px " + gridRowSize + "px 1fr");
     }
 }
 window.addEventListener("resize",setGridRowForSizeBrkPt);

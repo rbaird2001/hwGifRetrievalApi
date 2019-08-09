@@ -7,7 +7,19 @@ button{
     font-size: smaller;
 }
 
+#buttonsContainer{
+    display: none;
+    visibility:hidden;
+}
 
+#favToggle{
+    display: none;
+    visibility: hidden;
+}
+
+img{
+    max-width: width 400px;
+}
 
 .imgCont{
     position: relative;
@@ -26,6 +38,7 @@ button{
 
 .favButton{
     margin-top: 7px;
+    visibility: visible
 }
 
 #mainContainer{
@@ -36,7 +49,7 @@ button{
       "header header header"
       "output favorites input"
       "footer footer footer";
-    grid-template-columns: 6fr 2fr 2fr;
+    grid-template-columns: 500px 120px 120px;
     grid-template-rows: 30px 1fr 30px;
 }
 
@@ -45,8 +58,8 @@ button{
 }
 
 #results{
-display: flex;
-flex-wrap: wrap;   
+    display: flex;
+    flex-wrap: wrap;   
 }
 
 
@@ -55,7 +68,7 @@ flex-wrap: wrap;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border-right: black solid thin;
+    /* border-right: black solid thin; */
 }
 
 #favorites{
@@ -68,11 +81,22 @@ flex-wrap: wrap;
     /* margin-top: 25% */
 }
 
+#favToggle{
+    width: 10%;
+    background-color: antiquewhite;
+    background-size: contain;
+    margin-top: 2rem;
+    margin-right: 90%;
+}
+
 #optionsContainer{
     grid-area: input;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center
+    justify-content: center;
+    border-left: black thin solid;
+    margin-left: 10px;
+    padding-left: 10px;
 }
 
 #newFav{
@@ -99,21 +123,38 @@ flex-wrap: wrap;
 }
 
 #addFav{
-    margin-left: 0;
+    /* margin-left: 0; */
 }
 
-@media only screen and (max-width: 788px){
+@media only screen and (max-width: 500px){
+    img{
+        max-width: 300px;
+    }
     #mainContainer{
         width: 80%;
         margin: 0 auto;
         display: grid;
         grid-template-areas:
-          "input "
-          "favorites"
-          "output";
-        grid-template-columns: 1fr;
-        grid-template-rows: 80px 300px 1fr;
+            "buttons"
+            "input"
+            "favorites"
+            "output";
+        grid-template-columns: 300px;
+        grid-template-rows: 10px 10px 300px 10px;
     }
+
+    #buttonsContainer{
+        grid-area: buttons;
+        display: flex;
+        visibility: visible;
+    }
+
+    #favToggle{
+        display: inline;
+        visibility: visible;
+
+    }
+
     #favoritesContainer{
         /* grid-area: favorites; */
         border-style: none;
@@ -123,6 +164,8 @@ flex-wrap: wrap;
     #optionsContainer{
         /* grid-area: input; */
         border-style: none;
+        margin-left: 0;
+        padding-left: 0;
     }
 
     #newFav{  
