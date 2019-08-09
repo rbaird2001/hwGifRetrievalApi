@@ -4,11 +4,10 @@ var lastWidth = $(window).width();
 var favs = ["Pizza", "Doughnuts", "Sushi", "Hamburgers", "Beer"];
 loadFavs();
 newFavorite();
-$("#favToggle").click(collapseSize);
+collapseSize();
+$("#favToggle").click(collapseSize)
 
-
-function loadFavs() {
-    setGridRowForSizeBrkPt();
+function loadFavs(showVal) {
     for (i = 0; i < favs.length; i++) {
         let divFav = $("#favorites");
         let btnFav = $("<button>")
@@ -21,19 +20,22 @@ function loadFavs() {
         })
         divFav.append(btnFav);
     }
+    setGridRowForSizeBrkPt();
 }
 
 function newFavorite() {
     $("#addFav").click(function () {
-    let favName = $("#favName").val().trim();
+        let favName = $("#favName").val().trim();
         if (!favName) {
             alert("Specify your favorite first");
             return false;
         }
         else {
+            let showVal = "show"
             favs.push(favName);
             $("#favorites").empty();
-            loadFavs();
+            loadFavs(showVal);
+            $("#favName").val("")
         }
     })
 }
@@ -50,7 +52,7 @@ function searchGiphy(qTerm) {
         method: "GET"
     }).then(function (response) {
         var resDat = response.data
-        
+
         var divResults = $("#results")
         divResults.empty();
         for (i = 0; i < resDat.length; i++) {
@@ -82,32 +84,31 @@ function searchGiphy(qTerm) {
     });
 }
 
-function setGridRowForSizeBrkPt(){
+function setGridRowForSizeBrkPt() {
     let w = $(window).width();
-    //console.log(w);
-    if(w < 500){
-        if(w>lastWidth && !$("#favToggle").hasClass("collapsed")){
+    if (w < 500) {
+        if (w > lastWidth && !$("#favToggle").hasClass("collapsed")) {
             return;
         }
-        $("#favToggle").addClass("collapsed").attr("aria-expanded",true);
+        $("#favToggle").addClass("collapsed").attr("aria-expanded", true);
         $(".favButton").removeClass("show");
         lastWidth = w;
         collapseSize();
     }
-        else {
-        $("#mainContainer").css("grid-template-rows","80px 110px");
-        $("#favToggle").removeClass("collapsed").attr("aria-expanded",true);
+    else {
+        $("#mainContainer").css("grid-template-rows", "80px 110px");
+        $("#favToggle").removeClass("collapsed").attr("aria-expanded", true);
         $(".favButton").addClass("show");
     }
 }
 
-function collapseSize(){
-    if(!$("#favToggle").hasClass("collapsed")){
-        $("#mainContainer").css("grid-template-rows","80px 110px 40px 1fr");
-    }
-    else{
-        let gridRowSize = (favs.length * 34);
-        $("#mainContainer").css("grid-template-rows","80px 110px " + gridRowSize + "px 1fr");
-    }
+function collapseSize() {
+        if (!$("#favToggle").hasClass("collapsed")) {
+            $("#mainContainer").css("grid-template-rows", "80px 110px 40px 1fr");
+        }
+        else {
+            let gridRowSize = (favs.length * 34);
+            $("#mainContainer").css("grid-template-rows", "80px 110px " + gridRowSize + "px 1fr");
+        }
 }
-window.addEventListener("resize",setGridRowForSizeBrkPt);
+window.addEventListener("resize", setGridRowForSizeBrkPt);
