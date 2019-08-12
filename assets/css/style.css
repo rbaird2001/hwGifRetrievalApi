@@ -150,9 +150,16 @@ img{
     }
 
     #favToggle{
-        display: inline;
+        display: flex;
         visibility: visible;
-
+        background-color: #fff0f5;
+        color: black;
+        flex-direction: column;
+        justify-content: center;
+        width: 90%;        
+        margin-top: 2rem;
+        margin-right: 5%;
+        margin-left: 5%;
     }
 
     #favoritesContainer{
